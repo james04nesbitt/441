@@ -22,4 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('getchatts/', views.getchatts, name='getchatts'),
     path('postchatt/', views.postchatt, name='postchatt'),
+    path('getaudio/', views.getaudio, name='getaudio'),
+    path('postaudio/', views.postaudio, name='postaudio')
 ]
