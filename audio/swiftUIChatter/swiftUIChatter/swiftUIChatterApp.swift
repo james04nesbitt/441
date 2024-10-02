@@ -16,8 +16,9 @@ struct swiftUIChatterApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                            MainView()
-                        }
+                MainView()
+            }
+            .environment(AudioPlayer())
         }
     }
 }

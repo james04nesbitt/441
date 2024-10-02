@@ -195,4 +195,36 @@ final class AudioPlayer: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegat
         audioPlayer.currentTime = 0
         playerState.transition(.stopTapped)
     }
+    
+    func recTapped() {
+        if playerState == .recording {
+            audioRecorder.stop()
+            audio = try? Data(contentsOf: audioFilePath)
+            preparePlayer()
+        } else {
+            audioRecorder.record()
+        }
+        playerState.transition(.recTapped)
+    }
+    
+    func doneTapped() {
+        defer {
+            if let _ = audio {
+                playerState.transition(.doneTapped)
+            }
+        }
+                
+        if let _ = audioPlayer {
+            stopTapped()
+        }
+        
+        guard let audioRecorder else {
+            return
+        }
+        if playerState == .recording {
+            recTapped()
+        }
+        audioRecorder.deleteRecording()  // clean up
+    }
+    
 }
