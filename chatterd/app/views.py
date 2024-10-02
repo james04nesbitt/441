@@ -19,6 +19,8 @@ def getchatts(request):
     return JsonResponse(response)
 @csrf_exempt
 def postchatt(request):
+    print(f"Received POST request with data: {json_data}")  # Print statement for debugging
+
     if request.method != 'POST':
         return HttpResponse(status=404)
 
